@@ -1,112 +1,378 @@
-<div class="landing">
-  <section class="landing-hero" aria-labelledby="landing-title">
-    <div class="wrap landing-hero-grid">
-      <div class="landing-intro">
-        <p class="landing-kicker">Adithya Global School</p>
-        <h1 id="landing-title">
-          A place to learn.<br>
-          <em>Room to grow.</em>
-        </h1>
+<style nonce="{{nonce}}">
+  .ags {
+    --ink: #18332d;
+    --green: #113b32;
+    --mint: #e8f0e7;
+    --paper: #fffdf6;
+    --gold: #f6cf7c;
+    --line: #d4ded4;
+    color: var(--ink);
+    background: var(--paper);
+  }
 
-        <p class="landing-tagline">{{tagline}}</p>
+  .ags * { box-sizing: border-box; }
+  .ags section[id] { scroll-margin-top: 1.5rem; }
+  .ags a:focus-visible {
+    outline: 3px solid #a45712;
+    outline-offset: 4px;
+  }
 
-        <div class="landing-actions">
-          <a class="landing-button landing-primary" href="#admissions">
-            Explore admissions <span aria-hidden="true">↗</span>
+  .ags-wrap {
+    width: min(100% - 2.5rem, 72rem);
+    margin-inline: auto;
+  }
+
+  .ags-section { padding-block: clamp(3.5rem, 7vw, 6rem); }
+
+  .ags-label {
+    margin: 0 0 .8rem;
+    font: 750 .76rem/1.4 system-ui, sans-serif;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+
+  .ags h1, .ags h2, .ags h3 {
+    font-family: Georgia, serif;
+    line-height: 1.05;
+  }
+
+  .ags h1 {
+    margin: 0;
+    font-size: clamp(3rem, 7.5vw, 6.4rem);
+    letter-spacing: -.065em;
+  }
+
+  .ags h2 {
+    margin: 0 0 1rem;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    letter-spacing: -.045em;
+  }
+
+  .ags h3 {
+    margin: 0 0 .6rem;
+    font-size: 1.65rem;
+  }
+
+  .ags p { line-height: 1.65; }
+
+  .ags-hero {
+    color: var(--paper);
+    background:
+      radial-gradient(ellipse at 88% 12%, #2e6c58 0%, transparent 55%),
+      var(--green);
+  }
+
+  .ags-hero-grid, .ags-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: clamp(1.75rem, 5vw, 5rem);
+    align-items: center;
+  }
+
+  .ags-hero-grid { padding-block: clamp(4rem, 9vw, 8rem); }
+  .ags-hero .ags-label, .ags-enquiry .ags-label { color: var(--gold); }
+  .ags-hero h1 em { color: var(--gold); font-weight: 400; }
+
+  .ags-tagline {
+    max-width: 42ch;
+    margin: 1.25rem 0 0;
+    color: #e2f0e6;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+  }
+
+  .ags-tagline:empty { display: none; }
+
+  .ags-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    margin-top: 1.75rem;
+  }
+
+  .ags-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .6rem;
+    min-height: 3rem;
+    padding: .65rem 1.1rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    background: var(--gold);
+    color: var(--ink);
+    font: 750 .95rem/1.2 system-ui, sans-serif;
+    text-decoration: none;
+  }
+
+  .ags-button:hover { background: #ffe2a1; }
+
+  .ags-button-outline {
+    border-color: #a2c5b3;
+    background: transparent;
+    color: var(--paper);
+  }
+
+  .ags-button-outline:hover { background: #29604f; }
+
+  .ags-art {
+    padding: clamp(.6rem, 2vw, 1.4rem);
+    border: 1px solid #6e9e89;
+    border-radius: 48% 48% 1.5rem 1.5rem / 34% 34% 1.5rem 1.5rem;
+    background: #205344;
+  }
+
+  .ags-art svg { display: block; width: 100%; height: auto; }
+
+  .ags-nav { background: var(--mint); border-bottom: 1px solid var(--line); }
+
+  .ags-nav .ags-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .25rem 1.25rem;
+    padding-block: .7rem;
+  }
+
+  .ags-nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    color: var(--ink);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .ags-nav a:hover, .ags-link:hover { text-decoration: underline; }
+
+  .ags-heading { max-width: 47rem; margin-bottom: 1.7rem; }
+  .ags-heading > p:last-child, .ags-copy { color: #435950; }
+
+  .ags-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .ags-card {
+    padding: clamp(1.2rem, 3vw, 2rem);
+    border: 1px solid var(--line);
+    border-radius: 1.15rem;
+    background: #fff;
+  }
+
+  .ags-card > p:last-child { margin-bottom: 0; }
+
+  .ags-card-tag {
+    display: inline-block;
+    margin-bottom: 1.1rem;
+    padding: .25rem .65rem;
+    border-radius: 999px;
+    background: var(--mint);
+    font-size: .78rem;
+    font-weight: 750;
+  }
+
+  .ags-note {
+    padding: 1rem 1.25rem;
+    border-left: 4px solid #ba8430;
+    border-radius: 0 .75rem .75rem 0;
+    background: #faf0d9;
+  }
+
+  .ags-note p { margin: 0; }
+  .ags-tint { background: var(--mint); }
+  .ags-link { color: #175740; font-weight: 750; text-underline-offset: .2em; }
+
+  .ags-student-card {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .ags-student-card:hover { border-color: #42745e; }
+  .ags-student-card:hover h3 { text-decoration: underline; }
+
+  .ags-enquiry { color: var(--paper); background: var(--green); }
+
+  .ags-enquiry-panel {
+    padding: clamp(1.3rem, 4vw, 2.25rem);
+    border: 1px solid #6e9e89;
+    border-radius: 1.15rem;
+    background: #205344;
+    overflow-wrap: anywhere;
+  }
+
+  .ags-enquiry-panel p:last-child { margin-bottom: 0; }
+
+  @media (max-width: 48rem) {
+    .ags-hero-grid, .ags-split, .ags-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .ags-art { width: min(100%, 28rem); }
+    .ags-nav .ags-wrap { gap: .1rem 1rem; }
+  }
+</style>
+
+<div class="ags">
+  <section class="ags-hero" aria-labelledby="ags-title">
+    <div class="ags-wrap ags-hero-grid">
+      <div>
+        <p class="ags-label">Adithya Global School</p>
+        <h1 id="ags-title">A place to learn.<br><em>Room to grow.</em></h1>
+        <p class="ags-tagline">{{tagline}}</p>
+
+        <div class="ags-actions">
+          <a class="ags-button" href="#enquiry">
+            Make an enquiry <span aria-hidden="true">↗</span>
           </a>
-          <a class="landing-button landing-secondary" href="#about">
-            Get to know Adithya <span aria-hidden="true">↓</span>
+          <a class="ags-button ags-button-outline" href="#about">
+            Explore Adithya <span aria-hidden="true">↓</span>
           </a>
         </div>
       </div>
 
-      <div class="landing-art" aria-hidden="true">
-        <svg viewBox="0 0 480 380" fill="none"
-             xmlns="http://www.w3.org/2000/svg" focusable="false">
-          <circle cx="326" cy="126" r="67" fill="#F4CF83"/>
-          <path d="M22 304h436M44 325h392M69 347h342"
-                stroke="#96BDAB" stroke-width="1"/>
-          <path d="M106 304V184c0-47 38-85 85-85s85 38 85 85v120"
-                fill="#EBF2E8" stroke="#183D37" stroke-width="4"/>
-          <path d="M128 304V184c0-35 28-63 63-63s63 28 63 63v120"
+      <div class="ags-art" aria-hidden="true">
+        <svg viewBox="0 0 480 350" fill="none" focusable="false">
+          <circle cx="335" cy="104" r="63" fill="#F6CF7C"/>
+          <path d="M31 293h418M54 313h372M85 333h310" stroke="#96BDAB"/>
+          <path d="M89 293V166a80 80 0 0 1 160 0v127"
+                fill="#E8F0E7" stroke="#18332D" stroke-width="4"/>
+          <path d="M111 293V166a58 58 0 0 1 116 0v127"
                 stroke="#608D7C" stroke-width="2"/>
-          <path d="M207 304V212c0-38 31-69 69-69s69 31 69 69v92"
-                fill="#9FC4B0" stroke="#183D37" stroke-width="4"/>
-          <path d="M226 304v-92c0-28 22-50 50-50s50 22 50 50v92"
+          <path d="M193 293v-85a70 70 0 0 1 140 0v85"
+                fill="#9FC4B0" stroke="#18332D" stroke-width="4"/>
+          <path d="M214 293v-85a49 49 0 0 1 98 0v85"
                 stroke="#34695A" stroke-width="2"/>
-          <path d="M312 304v-52c0-29 24-53 53-53s53 24 53 53v52"
-                fill="#F4CF83" stroke="#183D37" stroke-width="4"/>
-          <path d="M330 304v-52c0-19 16-35 35-35s35 16 35 35v52"
+          <path d="M306 293v-51a54 54 0 0 1 108 0v51"
+                fill="#F6CF7C" stroke="#18332D" stroke-width="4"/>
+          <path d="M327 293v-51a33 33 0 0 1 66 0v51"
                 stroke="#926A2D" stroke-width="2"/>
-          <path d="M71 145v36m-18-18h36m320-53v24m-12-12h24M104 64v24m-12-12h24"
-                stroke="#F4CF83" stroke-width="2" stroke-linecap="round"/>
-          <path d="M48 304h385" stroke="#EBF2E8" stroke-width="2"/>
+          <path d="M65 112v30m-15-15h30m334-40v24m-12-12h24"
+                stroke="#F6CF7C" stroke-width="2" stroke-linecap="round"/>
         </svg>
       </div>
     </div>
   </section>
 
-  <div class="landing-wayfinding">
-    <nav class="wrap landing-links" aria-label="Explore the school">
-      <a href="#about">
-        <span aria-hidden="true">01</span> About Adithya
-        <span aria-hidden="true">↘</span>
-      </a>
-      <a href="/faculty">
-        <span aria-hidden="true">02</span> Our faculty
-        <span aria-hidden="true">↗</span>
-      </a>
-      <a href="/gallery">
-        <span aria-hidden="true">03</span> School gallery
-        <span aria-hidden="true">↗</span>
-      </a>
-    </nav>
-  </div>
-
-  <section class="wrap landing-about" id="about" aria-labelledby="about-title">
-    <div>
-      <p class="landing-kicker">Get to know us</p>
-      <h2 id="about-title">About our school</h2>
+  <nav class="ags-nav" aria-label="On this page">
+    <div class="ags-wrap">
+      <a href="#latest-news">Latest News</a>
+      <a href="#facilities">Facilities</a>
+      <a href="#student-zone">Student Zone</a>
+      <a href="#admissions">Admissions</a>
+      <a href="#enquiry">Enquiry</a>
     </div>
-    <p class="landing-copy">{{about}}</p>
+  </nav>
+
+  <section class="ags-wrap ags-section ags-split" id="about"
+           aria-labelledby="ags-about-title">
+    <div>
+      <p class="ags-label">Meet Adithya</p>
+      <h2 id="ags-about-title">About our school</h2>
+    </div>
+    <p class="ags-copy">{{about}}</p>
   </section>
 
-  <section class="wrap landing-discover" aria-label="Meet our school community">
-    <a class="landing-tile" href="/faculty">
-      <span class="landing-tile-label">Our teaching team</span>
-      <h2>Meet our faculty</h2>
-      <p>Get to know our teachers and explore their subjects, qualifications, and experience.</p>
-      <span class="landing-tile-arrow" aria-hidden="true">↗</span>
-    </a>
-
-    <a class="landing-tile landing-tile-gold" href="/gallery">
-      <span class="landing-tile-label">School in pictures</span>
-      <h2>Visit the gallery</h2>
-      <p>Take a look at life at Adithya through photos from around the school.</p>
-      <span class="landing-tile-arrow" aria-hidden="true">↗</span>
-    </a>
-  </section>
-
-  <section class="landing-admissions" id="admissions"
-           aria-labelledby="admissions-title">
-    <div class="wrap landing-admissions-grid">
-      <div>
-        <p class="landing-kicker">For prospective families</p>
-        <h2 id="admissions-title">Admissions</h2>
+  <section class="ags-section ags-tint" id="latest-news"
+           aria-labelledby="ags-news-title">
+    <div class="ags-wrap">
+      <div class="ags-heading">
+        <p class="ags-label">From the school office</p>
+        <h2 id="ags-news-title">Latest News</h2>
       </div>
-      <div>
-        <p class="landing-copy">{{admissions}}</p>
-        <a class="landing-button landing-primary" href="#contact">
-          Contact the school <span aria-hidden="true">→</span>
+
+      <!-- Replace this notice with approved announcements as they become available. -->
+      <div class="ags-note">
+        <p>School announcements and event updates will appear here.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ags-wrap ags-section" id="facilities"
+           aria-labelledby="ags-facilities-title">
+    <div class="ags-heading">
+      <p class="ags-label">Explore the campus</p>
+      <h2 id="ags-facilities-title">Facilities</h2>
+      <p>Find out about the spaces students use to learn, explore, and play.</p>
+    </div>
+
+    <!-- Replace these descriptions with the school's confirmed facility details. -->
+    <div class="ags-grid">
+      <article class="ags-card">
+        <span class="ags-card-tag">01 · Learning</span>
+        <h3>Classrooms</h3>
+        <p>Ask about classroom spaces and resources for your child’s year group.</p>
+      </article>
+
+      <article class="ags-card">
+        <span class="ags-card-tag">02 · Discovery</span>
+        <h3>Labs and library</h3>
+        <p>Find out what resources are available for practical learning and reading.</p>
+      </article>
+
+      <article class="ags-card">
+        <span class="ags-card-tag">03 · Activity</span>
+        <h3>Sports and play</h3>
+        <p>Ask the school about sports, recreation, and student activities.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="ags-section ags-tint" id="student-zone"
+           aria-labelledby="ags-student-title">
+    <div class="ags-wrap">
+      <div class="ags-heading">
+        <p class="ags-label">For students and families</p>
+        <h2 id="ags-student-title">Student Zone</h2>
+        <p>Find school updates, meet the teaching team, and see life on campus.</p>
+      </div>
+
+      <div class="ags-grid">
+        <a class="ags-card ags-student-card" href="#latest-news">
+          <span class="ags-card-tag">Updates</span>
+          <h3>School notices <span aria-hidden="true">↗</span></h3>
+          <p>See the latest announcements for students and families.</p>
+        </a>
+
+        <a class="ags-card ags-student-card" href="/faculty">
+          <span class="ags-card-tag">People</span>
+          <h3>Meet the teachers <span aria-hidden="true">↗</span></h3>
+          <p>Browse faculty profiles, subjects, and qualifications.</p>
+        </a>
+
+        <a class="ags-card ags-student-card" href="/gallery">
+          <span class="ags-card-tag">Gallery</span>
+          <h3>School in pictures <span aria-hidden="true">↗</span></h3>
+          <p>Explore photos from around Adithya Global School.</p>
         </a>
       </div>
     </div>
   </section>
 
-  <section class="wrap landing-contact" id="contact"
-           aria-labelledby="contact-title">
-    <p class="landing-kicker">Get in touch</p>
-    <h2 id="contact-title">Contact Adithya</h2>
-    <p class="landing-copy">{{contact}}</p>
+  <section class="ags-wrap ags-section ags-split" id="admissions"
+           aria-labelledby="ags-admissions-title">
+    <div>
+      <p class="ags-label">For prospective families</p>
+      <h2 id="ags-admissions-title">Admissions</h2>
+    </div>
+    <div>
+      <p class="ags-copy">{{admissions}}</p>
+      <a class="ags-link" href="#enquiry">Ask about admissions →</a>
+    </div>
+  </section>
+
+  <section class="ags-section ags-enquiry" id="enquiry"
+           aria-labelledby="ags-enquiry-title">
+    <div class="ags-wrap ags-split">
+      <div>
+        <p class="ags-label">We’re here to help</p>
+        <h2 id="ags-enquiry-title">Make an enquiry</h2>
+        <p>Contact the school about admissions, campus visits, or student life.</p>
+      </div>
+      <div class="ags-enquiry-panel" id="contact">
+        <h3>Contact the school office</h3>
+        <p>{{contact}}</p>
+      </div>
+    </div>
   </section>
 </div>
