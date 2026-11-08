@@ -1,4 +1,11 @@
 import { googleGet, readContent } from "./google.mjs";
+import layoutTemplate from "./pages/layout.html";
+import homeTemplate from "./pages/index.html";
+import facultyTemplate from "./pages/faculty.html";
+import facultyCardTemplate from "./pages/faculty-card.html";
+import profileTemplate from "./pages/faculty-profile.html";
+import galleryTemplate from "./pages/gallery.html";
+import galleryCardTemplate from "./pages/gallery-card.html";
 
 const entities = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
 const escape = value => String(value ?? "").replace(/[&<>"']/g, char => entities[char]);
@@ -6,19 +13,15 @@ const validId = value => /^[A-Za-z0-9_-]{1,128}$/.test(value ?? "");
 const published = value => value.toLowerCase() === "true";
 const imageTypes = new Set(["image/jpeg", "image/png", "image/webp", "image/gif", "image/avif"]);
 
-function layout(title, content) {
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${escape(title)} | Adithya Global School</title><link rel="stylesheet" href="/school.css">
-</head><body><a class="skip" href="#main">Skip to content</a>
-<header><div class="wrap bar"><a class="brand" href="/">Adithya Global School</a>
-<nav aria-label="Main"><a href="/#about">About</a><a href="/faculty">Faculty</a><a href="/gallery">Gallery</a><a href="/#contact">Contact</a></nav></div></header>
-<main id="main">${content}</main>
-<footer><div class="wrap">Adithya Global School</div></footer></body></html>`;
+function render(template, slots) {
+  return template.replace(/\{\{([a-z]+)\}\}/g, (marker, key) => {
+    if (!Object.hasOwn(slots, key)) throw new Error("Unknown HTML template placeholder: " + marker);
+    return slots[key];
+  });
 }
 
 function page(title, content, status = 200) {
-  return new Response(layout(title, content), {
+  return new Response(render(layoutTemplate, { title: escape(title), content }), {
     status,
     headers: {
       "Content-Type": "text/html; charset=utf-8",
@@ -34,14 +37,12 @@ function section(title, body) {
 }
 
 function home(site) {
-  return page("Home", `<section class="hero"><div class="wrap">
-<p class="eyebrow">Welcome to</p><h1>Adithya Global School</h1>
-<p>${escape(site.tagline)}</p><a class="button" href="/faculty">Meet our faculty</a></div></section>
-<div class="wrap home-sections">
-<section id="about"><h2>About our school</h2><p>${escape(site.about || "School information will be available here.")}</p></section>
-<section id="admissions"><h2>Admissions</h2><p>${escape(site.admissions || "Admissions information will be available here.")}</p></section>
-<section id="contact"><h2>Contact</h2><p>${escape(site.contact || "Contact information will be available here.")}</p></section>
-</div>`);
+  return page("Home", render(homeTemplate, {
+    tagline: escape(site.tagline),
+    about: escape(site.about || "School information will be available here."),
+    admissions: escape(site.admissions || "Admissions information will be available here."),
+    contact: escape(site.contact || "Contact information will be available here.")
+  }));
 }
 
 function photo(fileId, kind, id, alt) {
@@ -51,30 +52,40 @@ function photo(fileId, kind, id, alt) {
 }
 
 function facultyList(faculty) {
-  const cards = faculty.map(person => {
-    const id = person["Faculty ID"];
-    return `<li><a class="card" href="/faculty/${id}">
-${photo(person["Photo File ID"], "faculty", id, "")}
-<div><h2>${escape(person.Name)}</h2><p>${escape(person.Designation)}</p>
-<p>${escape(person.Department)}</p><p>${escape(person.Qualification)}</p><span>View profile →</span></div></a></li>`;
-  }).join("");
-  return page("Faculty", section("Our faculty", cards ? `<ul class="grid">${cards}</ul>` : "<p>Faculty profiles will be available here.</p>"));
+  const cards = faculty.map(person => render(facultyCardTemplate, {
+    id: person["Faculty ID"],
+    photo: photo(person["Photo File ID"], "faculty", person["Faculty ID"], ""),
+    name: escape(person.Name),
+    designation: escape(person.Designation),
+    department: escape(person.Department),
+    qualification: escape(person.Qualification)
+  })).join("");
+  return page("Faculty", render(facultyTemplate, {
+    directory: cards ? `<ul class="grid">${cards}</ul>` : "<p>Faculty profiles will be available here.</p>"
+  }));
 }
 
 function profile(person) {
   const details = ["Designation", "Department", "Qualification", "Experience", "Specialization", "Subjects", "Awards"]
     .filter(field => person[field])
     .map(field => `<dt>${field}</dt><dd>${escape(person[field])}</dd>`).join("");
-  return page(person.Name, section(person.Name, `<p><a href="/faculty">← All faculty</a></p>
-<div class="profile">${photo(person["Photo File ID"], "faculty", person["Faculty ID"], person.Name)}
-<div><dl>${details}</dl>${person.Biography ? `<h2>Biography</h2><p>${escape(person.Biography)}</p>` : ""}</div></div>`));
+  return page(person.Name, render(profileTemplate, {
+    name: escape(person.Name),
+    photo: photo(person["Photo File ID"], "faculty", person["Faculty ID"], person.Name),
+    details,
+    biography: person.Biography ? `<h2>Biography</h2><p>${escape(person.Biography)}</p>` : ""
+  }));
 }
 
 function galleryPage(items) {
-  const cards = items.map(item => `<li class="card">
-${photo(item["Drive File ID"], "gallery", item["Image ID"], item.Description || item.Title)}
-<div><h2>${escape(item.Title)}</h2><p>${escape(item.Description)}</p></div></li>`).join("");
-  return page("Gallery", section("School gallery", cards ? `<ul class="grid">${cards}</ul>` : "<p>School photos will be available here.</p>"));
+  const cards = items.map(item => render(galleryCardTemplate, {
+    photo: photo(item["Drive File ID"], "gallery", item["Image ID"], item.Description || item.Title),
+    title: escape(item.Title),
+    description: escape(item.Description)
+  })).join("");
+  return page("Gallery", render(galleryTemplate, {
+    gallery: cards ? `<ul class="grid">${cards}</ul>` : "<p>School photos will be available here.</p>"
+  }));
 }
 
 const missing = () => page("Page unavailable", section("Page unavailable", '<p><a href="/">Return to the school home page</a></p>'), 404);
