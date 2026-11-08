@@ -1,23 +1,79 @@
-<section class="hero">
-  <div class="wrap">
-    <p class="eyebrow">Welcome to</p>
-    <h1>Adithya Global School</h1>
-    <p>{{tagline}}</p>
-    <a class="button" href="/faculty">Meet our faculty</a>
-  </div>
-</section>
+<div class="landing">
+  <section class="landing-hero" aria-labelledby="landing-title">
+    <div class="wrap landing-hero-grid">
+      <div class="landing-intro">
+        <p class="landing-kicker">Adithya Global School</p>
+        <h1 id="landing-title">A place to learn.<br><em>Room to grow.</em></h1>
+        <p class="landing-tagline">{{tagline}}</p>
+        <div class="landing-actions">
+          <a class="landing-button landing-primary" href="#admissions">Explore admissions <span aria-hidden="true">↗</span></a>
+          <a class="landing-button landing-secondary" href="/faculty">Meet our faculty <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="landing-art" aria-hidden="true">
+        <svg viewBox="0 0 480 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="326" cy="126" r="67" fill="#F4CF83"/>
+          <path d="M22 304h436M44 325h392M69 347h342" stroke="#96BDAB" stroke-width="1"/>
+          <path d="M106 304V184c0-47 38-85 85-85s85 38 85 85v120" fill="#EBF2E8" stroke="#183D37" stroke-width="4"/>
+          <path d="M128 304V184c0-35 28-63 63-63s63 28 63 63v120" stroke="#608D7C" stroke-width="2"/>
+          <path d="M207 304V212c0-38 31-69 69-69s69 31 69 69v92" fill="#9FC4B0" stroke="#183D37" stroke-width="4"/>
+          <path d="M226 304v-92c0-28 22-50 50-50s50 22 50 50v92" stroke="#34695A" stroke-width="2"/>
+          <path d="M312 304v-52c0-29 24-53 53-53s53 24 53 53v52" fill="#F4CF83" stroke="#183D37" stroke-width="4"/>
+          <path d="M330 304v-52c0-19 16-35 35-35s35 16 35 35v52" stroke="#926A2D" stroke-width="2"/>
+          <path d="M71 145v36m-18-18h36m320-53v24m-12-12h24M104 64v24m-12-12h24" stroke="#F4CF83" stroke-width="2" stroke-linecap="round"/>
+          <path d="M48 304h385" stroke="#EBF2E8" stroke-width="2"/>
+        </svg>
+      </div>
+    </div>
+  </section>
 
-<div class="wrap home-sections">
-  <section id="about">
-    <h2>About our school</h2>
-    <p>{{about}}</p>
+  <div class="landing-wayfinding">
+    <nav class="wrap landing-links" aria-label="Explore the school">
+      <a href="#about"><span>01</span> About Adithya <span aria-hidden="true">↘</span></a>
+      <a href="/faculty"><span>02</span> Our faculty <span aria-hidden="true">↗</span></a>
+      <a href="/gallery"><span>03</span> School gallery <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+
+  <section class="wrap landing-about" id="about" aria-labelledby="about-title">
+    <div>
+      <p class="landing-kicker">Get to know us</p>
+      <h2 id="about-title">About our school</h2>
+    </div>
+    <p class="landing-copy">{{about}}</p>
   </section>
-  <section id="admissions">
-    <h2>Admissions</h2>
-    <p>{{admissions}}</p>
+
+  <section class="wrap landing-discover" aria-label="Explore Adithya">
+    <a class="landing-tile" href="/faculty">
+      <span class="landing-tile-label">The people</span>
+      <h2>Meet our faculty</h2>
+      <p>Explore teacher profiles, subjects, and professional backgrounds.</p>
+      <span class="landing-tile-arrow" aria-hidden="true">↗</span>
+    </a>
+    <a class="landing-tile landing-tile-gold" href="/gallery">
+      <span class="landing-tile-label">School in pictures</span>
+      <h2>Visit the gallery</h2>
+      <p>Explore photos from around Adithya Global School.</p>
+      <span class="landing-tile-arrow" aria-hidden="true">↗</span>
+    </a>
   </section>
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>{{contact}}</p>
+
+  <section class="landing-admissions" id="admissions" aria-labelledby="admissions-title">
+    <div class="wrap landing-admissions-grid">
+      <div>
+        <p class="landing-kicker">Your next step</p>
+        <h2 id="admissions-title">Admissions</h2>
+      </div>
+      <div>
+        <p class="landing-copy">{{admissions}}</p>
+        <a class="landing-button landing-primary" href="#contact">Contact the school <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap landing-contact" id="contact" aria-labelledby="contact-title">
+    <p class="landing-kicker">Get in touch</p>
+    <h2 id="contact-title">Contact Adithya</h2>
+    <p class="landing-copy">{{contact}}</p>
   </section>
 </div>

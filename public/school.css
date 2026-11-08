@@ -31,3 +31,146 @@ a.card:hover{border-color:var(--deep)}
 dt{font-weight:700}dd{margin:0 0 .65rem}
 footer{padding-block:1.5rem}
 .skip{position:absolute;left:.5rem;top:-5rem;background:white;padding:.5rem}.skip:focus{top:.5rem}
+
+/* Homepage */
+.landing {
+  --landing-dark: #123a35;
+  --landing-mint: #e5eee4;
+  --landing-gold: #f4cf83;
+  --landing-muted: #52635b;
+}
+.landing section[id] { scroll-margin-top: 1.5rem }
+.landing-hero {
+  background: radial-gradient(ellipse at 85% 25%, #25594c, transparent 65%), var(--landing-dark);
+  color: #fffdf6;
+}
+.landing-hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  align-items: center;
+  gap: clamp(1.5rem, 5vw, 4rem);
+  padding-block: clamp(3.5rem, 9vw, 7.5rem);
+}
+.landing-kicker {
+  margin: 0 0 1rem;
+  font-size: .76rem;
+  font-weight: 750;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+.landing-hero .landing-kicker,
+.landing-admissions .landing-kicker { color: var(--landing-gold) }
+.landing h1 {
+  font-size: clamp(2.75rem, 6.4vw, 5.5rem);
+  letter-spacing: -.065em;
+  line-height: .99;
+  margin: 0;
+}
+.landing h1 em { color: var(--landing-gold); font-weight: 400 }
+.landing h2 {
+  margin: 0;
+  font-size: clamp(2rem, 4.5vw, 3.7rem);
+  letter-spacing: -.045em;
+}
+.landing-tagline {
+  max-width: 36ch;
+  color: #e0ede4;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  margin: 1.4rem 0 0;
+}
+.landing-tagline:empty { display: none }
+.landing-actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 2rem }
+.landing-button {
+  display: inline-flex;
+  align-items: center;
+  gap: .75rem;
+  min-height: 3rem;
+  padding: .65rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: .9rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+.landing-primary { background: var(--landing-gold); color: #182e29 }
+.landing-primary:hover { background: #ffe1a5 }
+.landing-secondary { border-color: #a4c1b4; color: #fffdf6 }
+.landing-secondary:hover { background: #2a5a50 }
+.landing-art {
+  border: 1px solid #6d998a;
+  border-radius: 48% 48% 1.25rem 1.25rem / 35% 35% 1.25rem 1.25rem;
+  padding: clamp(.5rem, 2.5vw, 1.6rem);
+  background: #1d4b41;
+}
+.landing-art svg { display: block; width: 100%; height: auto }
+.landing-wayfinding { background: var(--landing-mint); border-bottom: 1px solid #ccdacf }
+.landing-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 }
+.landing-links a {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  padding: 1.1rem .8rem;
+  border-inline-start: 1px solid #ccdacf;
+  font-weight: 700;
+  text-decoration: none;
+}
+.landing-links a:last-child { border-inline-end: 1px solid #ccdacf }
+.landing-links a:hover { background: #d7e6d9 }
+.landing-links a span:first-child { color: #4a6358; font-size: .75rem }
+.landing-links a span:last-child { margin-inline-start: auto }
+.landing-about, .landing-admissions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  align-items: start;
+  gap: clamp(1.1rem, 5vw, 4rem);
+  padding-block: clamp(3rem, 7vw, 6rem);
+}
+.landing-copy {
+  max-width: 65ch;
+  margin: 0;
+  color: var(--landing-muted);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+}
+.landing-discover {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding-bottom: clamp(3rem, 7vw, 6rem);
+}
+.landing-tile {
+  position: relative;
+  display: block;
+  min-height: 14rem;
+  padding: clamp(1.35rem, 4vw, 2.6rem);
+  padding-right: clamp(3.6rem, 7vw, 5rem);
+  border: 1px solid #ccdacf;
+  border-radius: 1.2rem;
+  background: var(--landing-mint);
+  text-decoration: none;
+}
+.landing-tile:hover { border-color: #487463 }
+.landing-tile-gold { background: #faebcd; border-color: #e4d3ad }
+.landing-tile-label { display: block; font-size: .78rem; font-weight: 700; margin-bottom: 1rem }
+.landing-tile h2 { font-size: clamp(1.7rem, 3.6vw, 2.8rem) }
+.landing-tile p { margin-bottom: 0 }
+.landing-tile-arrow {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  aspect-ratio: 1;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+.landing-admissions { background: var(--landing-dark); color: #fffdf6 }
+.landing-admissions .landing-copy { color: #e0ede4; margin-bottom: 1.5rem }
+.landing-contact { padding-block: clamp(3rem, 7vw, 6rem) }
+.landing-contact .landing-copy { margin-top: 1.1rem }
+@media (max-width: 44rem) {
+  .landing-hero-grid, .landing-about, .landing-admissions-grid, .landing-discover { grid-template-columns: 1fr }
+  .landing-art { max-width: 30rem }
+  .landing-links a { padding-inline: .45rem; gap: .3rem; font-size: .8rem }
+  .landing-links a span:first-child { display: none }
+}
