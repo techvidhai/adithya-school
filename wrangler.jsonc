@@ -1,0 +1,6 @@
+{
+  "name": "adithya-global-school",
+  "main": "src/worker.mjs",
+  "compatibility_date": "2026-11-08",
+  "assets": { "directory": "./public", "binding": "ASSETS" }
+}

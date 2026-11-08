@@ -1,0 +1,33 @@
+:root{color-scheme:light;--ink:#142a2a;--deep:#153d38;--gold:#f4cf83;--paper:#fbfaf5;--line:#dddccd}
+*{box-sizing:border-box}
+body{margin:0;font:1rem/1.6 system-ui,sans-serif;color:var(--ink);background:var(--paper)}
+a{color:inherit}
+a:focus-visible{outline:3px solid #bc6c25;outline-offset:4px}
+.wrap{max-width:72rem;margin:auto;padding-inline:clamp(1.25rem,5vw,4rem)}
+header,footer{background:var(--deep);color:white}
+.bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;padding-block:1.1rem}
+.brand{font:700 1.35rem Georgia,serif;text-decoration:none}
+nav{display:flex;flex-wrap:wrap;gap:1.1rem}
+nav a{text-underline-offset:.25em}
+.hero{background:linear-gradient(125deg,#153d38,#276357);color:white;padding-block:clamp(4rem,11vw,9rem)}
+.eyebrow{color:var(--gold);letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+h1,h2{font-family:Georgia,serif;line-height:1.1}
+h1{font-size:clamp(2.7rem,7vw,5.75rem);margin:.2em 0}
+h2{font-size:1.7rem;margin:.15em 0}
+p{white-space:pre-line}
+.button{display:inline-block;margin-top:1rem;padding:.65rem 1rem;border-radius:.25rem;background:var(--gold);color:var(--ink);font-weight:700;text-decoration:none}
+.home-sections,.section{padding-block:3rem}
+.home-sections section{padding-block:1.3rem;border-bottom:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:1.25rem;padding:0;list-style:none;margin-top:2rem}
+.card{display:block;height:100%;border:1px solid var(--line);border-radius:.55rem;overflow:hidden;background:white;text-decoration:none}
+a.card:hover{border-color:var(--deep)}
+.card>div{padding:1.2rem}
+.card p{margin:.35rem 0}
+.card span{display:inline-block;margin-top:.65rem;text-decoration:underline}
+.card img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#e8ede4}
+.profile{display:flex;align-items:flex-start;flex-wrap:wrap;gap:2rem;margin-block:2rem}
+.profile img{width:min(100%,18rem);border-radius:.5rem}
+.profile div{flex:1;min-width:min(100%,18rem)}
+dt{font-weight:700}dd{margin:0 0 .65rem}
+footer{padding-block:1.5rem}
+.skip{position:absolute;left:.5rem;top:-5rem;background:white;padding:.5rem}.skip:focus{top:.5rem}
