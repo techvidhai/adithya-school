@@ -1,4 +1,177 @@
-<section class="wrap section">
-  <h1>Our faculty</h1>
-  {{directory}}
+<style nonce="{{nonce}}">
+  .faculty-directory {
+    --faculty-ink: #18332d;
+    --faculty-muted: #435950;
+    --faculty-line: #d4ded4;
+    --faculty-mint: #e8f0e7;
+    color: var(--faculty-ink);
+  }
+
+  .faculty-directory .faculty-intro {
+    margin-bottom: clamp(1.75rem, 4vw, 3rem);
+    padding: clamp(1.25rem, 4vw, 2.75rem);
+    border: 1px solid var(--faculty-line);
+    border-radius: 1.1rem;
+    background: var(--faculty-mint);
+  }
+
+  .faculty-directory .faculty-eyebrow {
+    margin: 0 0 .55rem;
+    color: #35604f;
+    font-size: .75rem;
+    font-weight: 750;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  .faculty-directory h1 {
+    margin: 0;
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    line-height: 1.05;
+    letter-spacing: -.035em;
+  }
+
+  .faculty-directory .faculty-summary {
+    max-width: 60ch;
+    margin: .8rem 0 0;
+    color: var(--faculty-muted);
+  }
+
+  .faculty-directory .faculty-list > h2 {
+    margin: 0;
+    font-size: 1.65rem;
+  }
+
+  .faculty-directory .faculty-hint {
+    max-width: 65ch;
+    margin: .4rem 0 1.15rem;
+    color: var(--faculty-muted);
+  }
+
+  .faculty-directory .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+    gap: .9rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .faculty-directory .card {
+    display: flex;
+    align-items: flex-start;
+    gap: .85rem;
+    max-width: 24rem;
+    height: 100%;
+    padding: .9rem;
+    border: 1px solid var(--faculty-line);
+    border-radius: .85rem;
+    background: #fff;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .faculty-directory .card:hover {
+    border-color: #527865;
+    background: #f5faf5;
+  }
+
+  .faculty-directory .card:focus-visible,
+  .faculty-directory .faculty-help a:focus-visible {
+    outline: 3px solid #a45712;
+    outline-offset: 3px;
+  }
+
+  .faculty-directory .card img {
+    display: block;
+    flex: 0 0 auto;
+    width: 4rem;
+    height: 5rem;
+    aspect-ratio: auto;
+    border-radius: .55rem;
+    object-fit: cover;
+    object-position: center 25%;
+    background: var(--faculty-mint);
+  }
+
+  .faculty-directory .card > div {
+    min-width: 0;
+    padding: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .faculty-directory .card h2 {
+    margin: 0 0 .25rem;
+    font-size: 1.2rem;
+    line-height: 1.2;
+  }
+
+  .faculty-directory .card p {
+    margin: .2rem 0;
+    color: var(--faculty-muted);
+    font-size: .88rem;
+    line-height: 1.4;
+  }
+
+  .faculty-directory .card p:empty {
+    display: none;
+  }
+
+  .faculty-directory .card span {
+    display: inline-block;
+    margin-top: .45rem;
+    color: #175740;
+    font-size: .82rem;
+    font-weight: 750;
+    text-decoration: underline;
+    text-underline-offset: .15em;
+  }
+
+  .faculty-directory .faculty-help {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .35rem 1rem;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--faculty-line);
+  }
+
+  .faculty-directory .faculty-help p {
+    margin: 0;
+  }
+
+  .faculty-directory .faculty-help a {
+    color: #175740;
+    font-weight: 750;
+    text-underline-offset: .2em;
+  }
+</style>
+
+<section class="wrap section faculty-directory" aria-labelledby="faculty-title">
+  <div class="faculty-intro">
+    <p class="faculty-eyebrow">Adithya Global School</p>
+    <h1 id="faculty-title">Meet our faculty</h1>
+    <p class="faculty-summary">
+      Get to know the teachers at Adithya. Browse the directory for each
+      teacher’s role, department, and qualifications.
+    </p>
+  </div>
+
+  <section class="faculty-list" aria-labelledby="faculty-list-title">
+    <h2 id="faculty-list-title">Faculty directory</h2>
+    <p class="faculty-hint">
+      Select a teacher to read more about their subjects, teaching experience,
+      and professional background where available.
+    </p>
+
+    {{directory}}
+  </section>
+
+  <div class="faculty-help">
+    <p>Have a question about a subject or department?</p>
+    <a href="/#contact">
+      Contact the school office <span aria-hidden="true">→</span>
+    </a>
+  </div>
 </section>

@@ -59,6 +59,8 @@ function photo(fileId, kind, id, alt) {
 }
 
 function facultyList(faculty) {
+  const nonce = crypto.randomUUID();
+
   const cards = faculty.map(person => render(facultyCardTemplate, {
     id: person["Faculty ID"],
     photo: photo(person["Photo File ID"], "faculty", person["Faculty ID"], ""),
@@ -69,8 +71,11 @@ function facultyList(faculty) {
   })).join("");
 
   return page("Faculty", render(facultyTemplate, {
-    directory: cards ? `<ul class="grid">${cards}</ul>` : "<p>Faculty profiles will be available here.</p>"
-  }));
+    nonce,
+    directory: cards
+      ? `<ul class="grid">${cards}</ul>`
+      : "<p>Faculty profiles will be available here.</p>"
+  }), 200, nonce);
 }
 
 function profile(person) {
